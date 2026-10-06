@@ -1,7 +1,7 @@
 ---
 title: "GNS3 (Graphical Network Simulator-3)"
 category: "Virtualización y Simulación de Redes / Laboratorios"
-author: "@cibercelia"
+author: "@MiuAkari"
 tags:
   - gns3
   - redes
