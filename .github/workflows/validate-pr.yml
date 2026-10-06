@@ -51,7 +51,7 @@ jobs:
                   continue
               
               # Validar formato kebab-case del nombre
-              if not re.match(r"^[a-z0-9\-]+\.md$", md_file.name):
+              if not re.match(r"^(?:[a-z0-9\-]+|MFA)\.md$", md_file.name):
                   errors.append(f"El archivo '{md_file.name}' debe usar formato kebab-case (solo minúsculas, números y guiones).")
 
               content = md_file.read_text(encoding="utf-8")
