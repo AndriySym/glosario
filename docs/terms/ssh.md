@@ -1,7 +1,7 @@
 ---
 title: SSH (Secure Shell)
 category: "Redes"
-author: "@tu-usuario-github"
+author: "@lizank176"
 tags:
   - ciberseguridad
   - redes
@@ -21,7 +21,7 @@ summary: "Protocolo de red cifrado para administrar sistemas de forma remota, tr
   </div>
   <div class="term-meta-item">
     <span class="term-meta-label">Autor / Colaborador</span>
-    <span class="term-meta-value"><a href="https://github.com/tu-usuario-github" target="_blank">@tu-usuario-github</a></span>
+    <span class="term-meta-value"><a href="https://github.com/lizank176" target="_blank">@lizank176</a></span>
   </div>
 </div>
 
