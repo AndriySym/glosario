@@ -2,7 +2,7 @@
 """
 Hook de MkDocs para generar automáticamente el índice del glosario de ciberseguridad.
 Escanea el directorio docs/terms/, extrae los metadatos YAML de cada término
-y construye un índice alfabético y visual interactivo en docs/index.md.
+y construye un índice alfabético, visual y completamente responsivo en docs/index.md.
 """
 
 import os
@@ -115,24 +115,32 @@ def generate_index_markdown(docs_dir):
     lines.append(f'  <div class="stat-card"><span class="stat-number">{len(authors)}</span><span class="stat-label">Colaboradores</span></div>')
     lines.append('</div>\n')
 
-    # 2. Barra de Navegación Alfabética Rápida
-    lines.append('<nav class="alphabet-nav" aria-label="Navegación alfabética">')
+    # 2. Barra de Navegación Alfabética Rápida (Full width y responsive)
+    lines.append('<div class="alphabet-nav-wrapper">')
+    lines.append('  <nav class="alphabet-nav" aria-label="Navegación alfabética">')
     for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
         if letter in grouped:
-            lines.append(f'<a href="#{letter.lower()}" class="alpha-link active">{letter}</a>')
+            lines.append(f'    <a href="#{letter.lower()}" class="alpha-link active" title="Ir a términos con {letter}">{letter}</a>')
         else:
-            lines.append(f'<span class="alpha-link disabled">{letter}</span>')
+            lines.append(f'    <span class="alpha-link disabled">{letter}</span>')
     if "#" in grouped:
-        lines.append('<a href="#otros" class="alpha-link active">#</a>')
-    lines.append('</nav>\n')
+        lines.append('    <a href="#otros" class="alpha-link active" title="Otros símbolos">#</a>')
+    lines.append('  </nav>')
+    lines.append('</div>\n')
 
-    # 3. Secciones por letra con tarjetas
+    # 3. Secciones por letra con tarjetas en grid responsive
     for letter in sorted_letters:
         anchor_id = "otros" if letter == "#" else letter.lower()
         display_letter = letter if letter != "#" else "# (Símbolos / Números)"
+        count = len(grouped[letter])
+        count_str = f"{count} término" if count == 1 else f"{count} términos"
+
         lines.append(f'<div class="letter-group-header" id="{anchor_id}">')
-        lines.append(f'  <h2 class="letter-title">{display_letter}</h2>')
-        lines.append(f'  <a href="#top" class="back-to-top" title="Volver arriba">↑ Arriba</a>')
+        lines.append('  <div class="letter-title-wrap">')
+        lines.append(f'    <h2 class="letter-title">{display_letter}</h2>')
+        lines.append(f'    <span class="letter-count">({count_str})</span>')
+        lines.append('  </div>')
+        lines.append('  <a href="#top" class="back-to-top" title="Volver arriba">↑ Arriba</a>')
         lines.append('</div>\n')
 
         lines.append('<div class="terms-card-grid">')
