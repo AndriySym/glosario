@@ -89,6 +89,7 @@ nav:
   - Términos:
     - MFA: terms/MFA.md
     - Inyección SQL: terms/sql-injection.md
+    - SSH: terms/ssh.md
     - Zero Trust: terms/zero-trust.md
   - Guía de Contribución:
     - Cómo Contribuir: guia-contribucion.md
