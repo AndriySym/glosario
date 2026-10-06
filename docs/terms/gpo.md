@@ -1,7 +1,7 @@
 ---
 title: "GPO (Objetos de Política de Grupo)"
 category: "Identidad y Administración de Sistemas"
-author: "@tu-usuario-github"
+author: "@AndriySym"
 tags:
   - gpo
   - active-directory
@@ -24,7 +24,7 @@ summary: "Conjunto centralizado de directivas que permite administrar la configu
   </div>
   <div class="term-meta-item">
     <span class="term-meta-label">Autor / Colaborador</span>
-    <span class="term-meta-value"><a href="https://github.com/tu-usuario-github" target="_blank">@tu-usuario-github</a></span>
+    <span class="term-meta-value"><a href="https://github.com/AndriySym" target="_blank">@AndriySym</a></span>
   </div>
 </div>
 
