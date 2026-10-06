@@ -25,7 +25,7 @@ summary: "Herramienta de simulación y emulación de redes que permite diseñar,
   </div>
   <div class="term-meta-item">
     <span class="term-meta-label">Autor</span>
-    <span class="term-meta-value"><a href="https://github.com/cibercelia" target="_blank">@cibercelia</a></span>
+    <span class="term-meta-value"><a href="https://github.com/MiuAkari" target="_blank">@MiuAkari</a></span>
   </div>
 </div>
 
