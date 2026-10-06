@@ -21,7 +21,7 @@ summary: "Sistema estándar de identificación pública de vulnerabilidades que 
 </div>
 <div class="term-meta-item">
 <span class="term-meta-label">Autor / Colaborador</span>
-<span class="term-meta-value"><a href="https://github.com/tu-usuario-github" target="_blank">@tu-usuario-github</a></span>
+<span class="term-meta-value"><a href="https://github.com/francisjrmoreno" target="_blank">@francisjrmoreno</a>, <a href="https://github.com/LuzSerranoDiaz" target="_blank">@LuzSerranoDiaz</a></span>
 </div>
 </div>
 
