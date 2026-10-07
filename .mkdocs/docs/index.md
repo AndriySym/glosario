@@ -13,8 +13,8 @@ description: "Glosario Colaborativo de Ciberseguridad creado por el alumnado con
 !!! info "🚀 ¿Cómo colaborar con un nuevo término?"
     1. Revisa la lista de términos para evitar duplicados.
     2. Haz un **Fork** del repositorio en GitHub.
-    3. Consulta la [**Guía de Contribución**](guia-contribucion.md) y copia la [plantilla oficial](plantillas/plantilla-termino.md) en `docs/terms/nombre-del-termino.md`.
-    4. Redacta el contenido, pruébalo en local con **Docker** y abre un **Pull Request**.
+    3. Consulta la [**Guía de Contribución**](guia-contribucion.md) y copia la [plantilla oficial](plantillas/plantilla-termino.md) en `terminos/nombre-del-termino.md`.
+    4. Redacta el contenido y abre un **Pull Request**.
 
 ---
 

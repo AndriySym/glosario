@@ -1,16 +1,22 @@
 #!/usr/bin/env python3
 """
-Hook de MkDocs para generar automáticamente el índice del glosario de ciberseguridad.
-Escanea el directorio docs/terms/, extrae los metadatos YAML de cada término
-y construye un índice alfabético, visual y completamente responsivo en docs/index.md.
+Hook de MkDocs para el Glosario de Ciberseguridad.
+Sincroniza automáticamente los archivos de terminos/ y plantilla.md de la raíz
+dentro del entorno de compilación de .mkdocs/ y genera el índice alfabético interactivo.
 """
 
 import os
 import re
 import html
+import shutil
 import unicodedata
 import yaml
 from pathlib import Path
+
+def get_repo_root(config):
+    """Obtiene la ruta raíz del repositorio a partir de la ruta del archivo mkdocs.yml."""
+    config_file = Path(config["config_file_path"]).resolve()
+    return config_file.parent.parent
 
 def normalize_letter(char):
     """Normaliza un caracter para agrupación alfabética eliminando tildes."""
@@ -27,12 +33,9 @@ def clean_summary_text(text):
     """Elimina etiquetas HTML y sintaxis markdown residual para evitar roturas del DOM."""
     if not text:
         return ""
-    # Eliminar bloques HTML completos
     cleaned = re.sub(r"<[^>]+>", "", text)
-    # Eliminar formato markdown como negritas, cursivas, enlaces y encabezados
     cleaned = re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", cleaned)
     cleaned = re.sub(r"[*_`#~]", "", cleaned)
-    # Normalizar espacios en blanco
     cleaned = " ".join(cleaned.split()).strip()
     return cleaned
 
@@ -44,7 +47,6 @@ def parse_term_file(filepath):
     frontmatter = {}
     body = content
 
-    # Comprobar si tiene frontmatter YAML (--- ... ---)
     match = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", content, re.DOTALL)
     if match:
         raw_yaml = match.group(1).expandtabs(2)
@@ -59,7 +61,6 @@ def parse_term_file(filepath):
 
     title = frontmatter.get("title")
     if not title:
-        # Intentar extraer del primer encabezado # Titulo
         h1_match = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
         if h1_match:
             title = clean_summary_text(h1_match.group(1).strip())
@@ -70,7 +71,6 @@ def parse_term_file(filepath):
     if summary:
         summary = clean_summary_text(str(summary))
     else:
-        # Extraer el primer párrafo no vacío que no sea un bloque HTML ni encabezado
         paragraphs = [p.strip() for p in body.split("\n\n") if p.strip()]
         valid_paragraphs = [
             clean_summary_text(p) for p in paragraphs
@@ -93,11 +93,39 @@ def parse_term_file(filepath):
         "rel_path": f"terms/{slug}/",
     }
 
+def on_config(config):
+    """Evento que se ejecuta antes de compilar: copia terminos/ y plantilla.md al docs_dir de MkDocs."""
+    repo_root = get_repo_root(config)
+    docs_dir = Path(config["docs_dir"])
+
+    # 1. Sincronizar terminos/ -> .mkdocs/docs/terms/
+    source_terms = repo_root / "terminos"
+    dest_terms = docs_dir / "terms"
+    dest_terms.mkdir(parents=True, exist_ok=True)
+
+    if source_terms.exists():
+        for f in source_terms.glob("*.md"):
+            shutil.copy2(f, dest_terms / f.name)
+
+    # 2. Sincronizar plantilla.md -> .mkdocs/docs/plantillas/plantilla-termino.md
+    source_template = repo_root / "plantilla.md"
+    dest_template_dir = docs_dir / "plantillas"
+    dest_template_dir.mkdir(parents=True, exist_ok=True)
+    if source_template.exists():
+        shutil.copy2(source_template, dest_template_dir / "plantilla-termino.md")
+
+    return config
+
 def generate_index_markdown(docs_dir):
-    """Genera el bloque Markdown del índice a partir de los archivos en terms/."""
+    """Genera el bloque Markdown del índice a partir de los archivos en terms/ o terminos/."""
     terms_dir = Path(docs_dir) / "terms"
     if not terms_dir.exists():
-        return "\n*No se encontró el directorio de términos.*\n"
+        # Fallback a terminos/ en la raíz del repositorio
+        repo_terms = Path(docs_dir).resolve().parent.parent / "terminos"
+        if repo_terms.exists():
+            terms_dir = repo_terms
+        else:
+            return "\n*No se encontró el directorio de términos.*\n"
 
     term_files = [
         terms_dir / f for f in os.listdir(terms_dir)
@@ -116,10 +144,8 @@ def generate_index_markdown(docs_dir):
         if term_data["category"]:
             categories.add(term_data["category"])
 
-    # Ordenar alfabéticamente por título
     terms.sort(key=lambda t: unicodedata.normalize('NFKD', t["title"].lower()))
 
-    # Agrupar por letra
     grouped = {}
     for term in terms:
         letter = normalize_letter(term["title"])
@@ -138,7 +164,7 @@ def generate_index_markdown(docs_dir):
     lines.append(f'  <div class="stat-card"><span class="stat-number">{len(authors)}</span><span class="stat-label">Colaboradores</span></div>')
     lines.append('</div>\n')
 
-    # 2. Barra de Navegación Alfabética Rápida (Full width y responsive)
+    # 2. Barra de Navegación Alfabética Rápida
     lines.append('<div class="alphabet-nav-wrapper">')
     lines.append('  <nav class="alphabet-nav" aria-label="Navegación alfabética">')
     for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ":
@@ -151,7 +177,7 @@ def generate_index_markdown(docs_dir):
     lines.append('  </nav>')
     lines.append('</div>\n')
 
-    # 3. Secciones por letra con tarjetas en grid responsive
+    # 3. Secciones por letra con tarjetas
     for letter in sorted_letters:
         anchor_id = "otros" if letter == "#" else letter.lower()
         display_letter = letter if letter != "#" else "# (Símbolos / Números)"

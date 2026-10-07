@@ -17,7 +17,6 @@ Antes de comenzar, asegúrate de contar con:
 
 - Una cuenta en [GitHub](https://github.com).
 - [Git](https://git-scm.com) instalado y configurado en tu equipo.
-- [Docker Desktop](https://www.docker.com) (o Python 3.10+) para probar el sitio en local.
 
 ---
 
@@ -27,10 +26,9 @@ Antes de comenzar, asegúrate de contar con:
 graph LR
     A[1. Fork del Repositorio] --> B[2. Crear Rama feat/termino]
     B --> C[3. Copiar Plantilla y Redactar]
-    C --> D[4. Probar en Local con Docker]
-    D --> E[5. Commit y Push]
-    E --> F[6. Abrir Pull Request]
-    F --> G[7. Validación CI y Aprobación]
+    C --> D[4. Commit y Push]
+    D --> E[5. Abrir Pull Request]
+    E --> F[6. Validación CI y Aprobación]
 ```
 
 ### Paso 1: Hacer un Fork del Repositorio
@@ -54,11 +52,11 @@ git checkout -b feat/nombre-del-termino
 ---
 
 ### Paso 3: Crear tu Término Usando la Plantilla
-1. Copia el archivo de plantilla a la carpeta `docs/terms/` con el nombre de tu término en minúsculas:
+1. Copia la plantilla oficial `plantilla.md` a la carpeta `terminos/` con el nombre de tu término en minúsculas:
    ```bash
-   cp docs/plantillas/plantilla-termino.md docs/terms/nombre-del-termino.md
+   cp plantilla.md terminos/nombre-del-termino.md
    ```
-2. Abre `docs/terms/nombre-del-termino.md` en tu editor de código (VS Code, etc.).
+2. Abre `terminos/nombre-del-termino.md` en tu editor de código (VS Code, etc.).
 3. Rellena los **metadatos YAML (Frontmatter)** obligatorios al inicio del archivo:
    ```yaml
    ---
@@ -81,29 +79,24 @@ git checkout -b feat/nombre-del-termino
 
 ---
 
-### Paso 4: Probar la Web en Local con Docker
+### Paso 4: (Opcional) Probar la Web en Local con Docker
 
-Para verificar que no hay enlaces rotos y que el índice de la página principal se genera correctamente:
+Si deseas comprobar cómo se visualiza la web con Docker:
 
 ```bash
-docker compose up
+docker compose -f .mkdocs/compose.yaml up
 ```
 
 Abre tu navegador en: **[http://localhost:8000](http://localhost:8000)**
 
-!!! note "Recarga automática"
-    Cada vez que guardes cambios en tu archivo `.md`, la página web se recargará automáticamente mostrando tus modificaciones.
-
-*(Si prefieres usar Python nativo sin Docker: `pip install -r requirements.txt && mkdocs serve`)*.
-
 ---
 
 ### Paso 5: Confirmar Cambios y Subir la Rama
-Una vez revisado el resultado en local:
+Una vez revisado el resultado:
 
 ```bash
-git add docs/terms/nombre-del-termino.md
-git commit -m "feat(terms): añadir definición de <nombre-del-termino>"
+git add terminos/nombre-del-termino.md
+git commit -m "feat(terminos): añadir definición de <nombre-del-termino>"
 git push origin feat/nombre-del-termino
 ```
 
