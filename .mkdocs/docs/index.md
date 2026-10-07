@@ -4,7 +4,7 @@ description: "Glosario Colaborativo de Ciberseguridad creado por el alumnado con
 ---
 
 <div class="hero-banner" id="top">
-  <h1>🛡️ Glosario Colaborativo de Ciberseguridad</h1>
+  <h1>🛡️ Glosario colaborativo de ciberseguridad</h1>
   <p>
     Bienvenido al repositorio de conocimiento técnico y terminología de ciberseguridad. Este proyecto sigue la metodología <strong>Docs-as-Code</strong>, donde cada término es investigado, redactado y mantenido por el alumnado mediante contribuciones vía Pull Request.
   </p>

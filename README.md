@@ -1,10 +1,10 @@
-# 🛡️ Glosario Colaborativo de Ciberseguridad
+# 🛡️ Glosario colaborativo de ciberseguridad
 
 Repositorio colaborativo para crear, organizar y mantener una enciclopedia técnica de ciberseguridad mediante contribuciones del alumnado con **Pull Requests**.
 
 ---
 
-## 📂 Estructura del Repositorio
+## 📂 Estructura del repositorio
 
 Para facilitar la contribución, los alumnos únicamente interactúan con la carpeta de términos y la plantilla:
 
@@ -24,12 +24,12 @@ glosario/
 
 ---
 
-## 🚀 Cómo Contribuir con un Nuevo Término (Paso a Paso)
+## 🚀 Cómo contribuir con un nuevo término (paso a paso)
 
-### 1. Haz un Fork del Repositorio
+### 1. Haz un fork del repositorio
 Pulsa el botón **Fork** (arriba a la derecha en GitHub) para copiar el repositorio a tu cuenta personal.
 
-### 2. Clona tu Fork y Crea una Rama
+### 2. Clona tu fork y crea una rama
 Abre tu terminal y ejecuta:
 
 ```bash
@@ -40,7 +40,7 @@ git checkout -b feat/nombre-del-termino
 
 > 💡 *Usa nombres en minúsculas separados por guiones para la rama, por ejemplo: `feat/cross-site-scripting` o `feat/ransomware`.*
 
-### 3. Redacta tu Término Usando la Plantilla
+### 3. Redacta tu término usando la plantilla
 1. Copia la plantilla a la carpeta `terminos/` con el nombre de tu concepto en formato **kebab-case**:
    ```bash
    cp plantilla.md terminos/nombre-del-termino.md
@@ -49,7 +49,7 @@ git checkout -b feat/nombre-del-termino
 3. Rellena el bloque inicial de **metadatos YAML (Frontmatter)**:
    ```yaml
    ---
-   title: "Nombre del Término"
+   title: "Nombre del término"
    category: "Vulnerabilidades Web"
    author: "@tu-usuario-github"
    tags:
@@ -58,11 +58,11 @@ git checkout -b feat/nombre-del-termino
    summary: "Resumen conciso del término en 1 o 2 líneas explicativas."
    ---
    ```
-4. Desarrolla las secciones del término: **Definición**, **¿Cómo funciona?**, **Ejemplo práctico (seguro vs inseguro)**, **Medidas de mitigación** y **Referencias**.
+4. Desarrolla las secciones del término: **Definición**, **¿Cómo funciona?**, **Ejemplo práctico (seguro vs. inseguro)**, **Medidas de mitigación** y **Referencias**.
 
 ---
 
-### 4. Enviar tu Contribución (Pull Request)
+### 4. Envía tu contribución (pull request)
 
 1. Guarda los cambios y haz commit:
    ```bash
@@ -80,7 +80,7 @@ git checkout -b feat/nombre-del-termino
 
 ---
 
-## 🐳 (Opcional) Probar la Web en Local con Docker
+## 🐳 (Opcional) Probar la web en local con Docker
 
 Si deseas previsualizar cómo se renderiza la web completa en tu navegador:
 

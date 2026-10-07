@@ -166,7 +166,7 @@ def generate_index_markdown(docs_dir):
 
     # 1. Tarjetas de Estadísticas
     lines.append('<div class="glossary-stats-grid">')
-    lines.append(f'  <div class="stat-card"><span class="stat-number">{len(terms)}</span><span class="stat-label">Términos Definidos</span></div>')
+    lines.append(f'  <div class="stat-card"><span class="stat-number">{len(terms)}</span><span class="stat-label">Términos definidos</span></div>')
     lines.append(f'  <div class="stat-card"><span class="stat-number">{len(categories)}</span><span class="stat-label">Categorías</span></div>')
     lines.append(f'  <div class="stat-card"><span class="stat-number">{len(authors)}</span><span class="stat-label">Colaboradores</span></div>')
     lines.append('</div>\n')
@@ -277,8 +277,8 @@ def generate_contributors_markdown(docs_dir):
 
     # Estadísticas de colaboradores
     lines.append('<div class="glossary-stats-grid">')
-    lines.append(f'  <div class="stat-card"><span class="stat-number">{len(sorted_contributors)}</span><span class="stat-label">Colaboradores Activos</span></div>')
-    lines.append(f'  <div class="stat-card"><span class="stat-number">{len(terms)}</span><span class="stat-label">Términos Publicados</span></div>')
+    lines.append(f'  <div class="stat-card"><span class="stat-number">{len(sorted_contributors)}</span><span class="stat-label">Colaboradores activos</span></div>')
+    lines.append(f'  <div class="stat-card"><span class="stat-number">{len(terms)}</span><span class="stat-label">Términos publicados</span></div>')
     lines.append('</div>\n')
 
     # Cuadrícula de tarjetas de colaboradores
@@ -331,7 +331,7 @@ def on_page_markdown(markdown, page, config, files):
         if "<!-- GLOSSARY_INDEX -->" in markdown:
             return markdown.replace("<!-- GLOSSARY_INDEX -->", index_html)
         else:
-            return markdown + "\n\n## 📚 Explorador de Términos\n\n" + index_html
+            return markdown + "\n\n## 📚 Explorador de términos\n\n" + index_html
     elif page.file.src_path == "colaboradores.md":
         contributors_html = generate_contributors_markdown(docs_dir)
         if "<!-- CONTRIBUTORS_LIST -->" in markdown:

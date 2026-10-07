@@ -1,17 +1,17 @@
 ---
-title: "Guía de Contribución"
+title: "Guía de contribución"
 description: "Guía paso a paso para que el alumnado contribuya con nuevos términos al Glosario de Ciberseguridad."
 ---
 
-# 🚀 Guía de Contribución al Glosario
+# 🚀 Guía de contribución al glosario
 
-¡Bienvenido a la guía de contribución del **Glosario Colaborativo de Ciberseguridad**!
+¡Bienvenido a la guía de contribución del **Glosario colaborativo de ciberseguridad**!
 
-Este proyecto utiliza la metodología **Docs-as-Code** (*Documentación como Código*). Todo el glosario se gestiona mediante control de versiones en Git y se publica automáticamente en GitHub Pages tras validar cada aportación mediante **Pull Requests (PR)**.
+Este proyecto utiliza la metodología **Docs-as-Code** (*Documentación como código*). Todo el glosario se gestiona mediante control de versiones en Git y se publica automáticamente en GitHub Pages tras validar cada aportación mediante **Pull Requests (PR)**.
 
 ---
 
-## 📋 Requisitos Previos
+## 📋 Requisitos previos
 
 Antes de comenzar, asegúrate de contar con:
 
@@ -20,24 +20,24 @@ Antes de comenzar, asegúrate de contar con:
 
 ---
 
-## 🛠️ Flujo de Trabajo Paso a Paso
+## 🛠️ Flujo de trabajo paso a paso
 
 ```mermaid
 graph LR
-    A[1. Fork del Repositorio] --> B[2. Crear Rama feat/termino]
-    B --> C[3. Copiar Plantilla y Redactar]
-    C --> D[4. Commit y Push]
-    D --> E[5. Abrir Pull Request]
-    E --> F[6. Validación CI y Aprobación]
+    A[1. Fork del repositorio] --> B[2. Crear rama feat/termino]
+    B --> C[3. Copiar plantilla y redactar]
+    C --> D[4. Commit y push]
+    D --> E[5. Abrir pull request]
+    E --> F[6. Validación CI y aprobación]
 ```
 
-### Paso 1: Hacer un Fork del Repositorio
+### Paso 1: Hacer un fork del repositorio
 1. Dirígete al repositorio principal en GitHub: `https://github.com/cibercelia/glosario`.
 2. Haz clic en el botón **Fork** (arriba a la derecha) para crear una copia en tu cuenta personal.
 
 ---
 
-### Paso 2: Clonar y Crear una Rama de Trabajo
+### Paso 2: Clonar y crear una rama de trabajo
 Abre tu terminal y clona tu repositorio bifurcado (sustituye `TU-USUARIO` por tu usuario de GitHub):
 
 ```bash
@@ -51,7 +51,7 @@ git checkout -b feat/nombre-del-termino
 
 ---
 
-### Paso 3: Crear tu Término Usando la Plantilla
+### Paso 3: Crear tu término usando la plantilla
 1. Copia la plantilla oficial `plantilla.md` a la carpeta `terminos/` con el nombre de tu término en minúsculas:
    ```bash
    cp plantilla.md terminos/nombre-del-termino.md
@@ -60,7 +60,7 @@ git checkout -b feat/nombre-del-termino
 3. Rellena los **metadatos YAML (Frontmatter)** obligatorios al inicio del archivo:
    ```yaml
    ---
-   title: "Nombre del Término"
+   title: "Nombre del término"
    category: "Vulnerabilidades Web" # Categoría del concepto
    author: "@tu-usuario-github" # Tu usuario para darte crédito
    tags:
@@ -70,16 +70,16 @@ git checkout -b feat/nombre-del-termino
    summary: "Resumen explicativo del término en 1 o 2 frases concisas."
    ---
    ```
-4. Desarrolla las secciones requeridas siguiendo la [Plantilla de Términos](plantillas/plantilla-termino.md):
+4. Desarrolla las secciones requeridas siguiendo la [Plantilla de términos](plantillas/plantilla-termino.md):
    - **📖 Definición**: Qué es y contexto técnico.
    - **⚙️ ¿Cómo funciona?**: Flujo, arquitectura o principios.
-   - **🎯 Ejemplo Práctico**: Escenario vulnerable vs seguro con código si aplica.
-   - **🛡️ Mitigación y Buenas Prácticas**: Recomendaciones oficiales (OWASP, NIST, CIS...).
+   - **🎯 Ejemplo práctico**: Escenario vulnerable vs seguro con código si aplica.
+   - **🛡️ Mitigación y buenas prácticas**: Recomendaciones oficiales (OWASP, NIST, CIS...).
    - **🔗 Referencias**: Enlaces a fuentes fiables.
 
 ---
 
-### Paso 4: (Opcional) Probar la Web en Local con Docker
+### Paso 4: (Opcional) Probar la web en local con Docker
 
 Si deseas comprobar cómo se visualiza la web con Docker:
 
@@ -91,7 +91,7 @@ Abre tu navegador en: **[http://localhost:8000](http://localhost:8000)**
 
 ---
 
-### Paso 5: Confirmar Cambios y Subir la Rama
+### Paso 5: Confirmar cambios y subir la rama
 Una vez revisado el resultado:
 
 ```bash
@@ -102,7 +102,7 @@ git push origin feat/nombre-del-termino
 
 ---
 
-### Paso 6: Abrir el Pull Request (PR)
+### Paso 6: Abrir el pull request (PR)
 1. Ve a la página de tu fork en GitHub y pulsa en **"Compare & pull request"**.
 2. Completa la plantilla de PR marcando las casillas del checklist.
 3. El sistema de Integración Continua (GitHub Actions) ejecutará automáticamente las pruebas de validación:
@@ -113,8 +113,8 @@ git push origin feat/nombre-del-termino
 
 ---
 
-## ⚠️ Reglas de Calidad y Buenas Prácticas
+## ⚠️ Reglas de calidad y buenas prácticas
 
 - **Originalidad**: Redacta las explicaciones con tus propias palabras y cita siempre las fuentes consultadas.
-- **Rigor Técnico**: Utiliza terminología precisa y estándares de la industria (OWASP, NIST, MITRE ATT&CK, RFCs).
-- **Ejemplos Claros**: Los bloques de código deben estar formateados y comentados.
+- **Rigor técnico**: Utiliza terminología precisa y estándares de la industria (OWASP, NIST, MITRE ATT&CK, RFCs).
+- **Ejemplos claros**: Los bloques de código deben estar formateados y comentados.
