@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
 Hook de MkDocs para el Glosario de Ciberseguridad.
-Sincroniza automáticamente los archivos de terminos/ y plantilla.md de la raíz
-dentro del entorno de compilación de .mkdocs/ y genera el índice alfabético interactivo.
+Sincroniza automáticamente los archivos de terminos/ y plantilla.md de la raíz,
+genera el índice alfabético interactivo en index.md y la lista dinámica de colaboradores en colaboradores.md.
 """
 
 import os
@@ -116,16 +116,15 @@ def on_config(config):
 
     return config
 
-def generate_index_markdown(docs_dir):
-    """Genera el bloque Markdown del índice a partir de los archivos en terms/ o terminos/."""
+def get_all_terms(docs_dir):
+    """Obtiene y parsea todos los términos del glosario."""
     terms_dir = Path(docs_dir) / "terms"
     if not terms_dir.exists():
-        # Fallback a terminos/ en la raíz del repositorio
         repo_terms = Path(docs_dir).resolve().parent.parent / "terminos"
         if repo_terms.exists():
             terms_dir = repo_terms
         else:
-            return "\n*No se encontró el directorio de términos.*\n"
+            return []
 
     term_files = [
         terms_dir / f for f in os.listdir(terms_dir)
@@ -133,12 +132,20 @@ def generate_index_markdown(docs_dir):
     ]
 
     terms = []
+    for tf in term_files:
+        terms.append(parse_term_file(tf))
+    return terms
+
+def generate_index_markdown(docs_dir):
+    """Genera el bloque Markdown del índice a partir de los archivos en terms/."""
+    terms = get_all_terms(docs_dir)
+    if not terms:
+        return "\n*No se encontraron términos en el glosario.*\n"
+
     authors = set()
     categories = set()
 
-    for tf in term_files:
-        term_data = parse_term_file(tf)
-        terms.append(term_data)
+    for term_data in terms:
         if term_data["author"]:
             authors.add(term_data["author"])
         if term_data["category"]:
@@ -231,20 +238,113 @@ def generate_index_markdown(docs_dir):
 
     return "\n".join(lines)
 
+def generate_contributors_markdown(docs_dir):
+    """Genera la vista de colaboradores con sus avatares de GitHub y términos aportados."""
+    terms = get_all_terms(docs_dir)
+    if not terms:
+        return "\n*No se encontraron colaboradores registrados.*\n"
+
+    contributors_map = {}
+
+    for term in terms:
+        raw_author = str(term["author"]).strip() if term["author"] else "Comunidad"
+        # Separar múltiples autores si vienen separados por comas o 'y'
+        author_tokens = re.split(r"[,y]\s*", raw_author)
+        for auth in author_tokens:
+            auth = auth.strip()
+            if not auth:
+                continue
+            username = auth.lstrip("@") if auth.startswith("@") else auth
+            handle = f"@{username}" if auth.startswith("@") else auth
+            is_github = auth.startswith("@")
+
+            if handle not in contributors_map:
+                contributors_map[handle] = {
+                    "handle": handle,
+                    "username": username,
+                    "is_github": is_github,
+                    "terms": []
+                }
+            contributors_map[handle]["terms"].append(term)
+
+    # Ordenar por cantidad de aportaciones (descendente) y luego alfabéticamente
+    sorted_contributors = sorted(
+        contributors_map.values(),
+        key=lambda c: (-len(c["terms"]), c["handle"].lower())
+    )
+
+    lines = []
+
+    # Estadísticas de colaboradores
+    lines.append('<div class="glossary-stats-grid">')
+    lines.append(f'  <div class="stat-card"><span class="stat-number">{len(sorted_contributors)}</span><span class="stat-label">Colaboradores Activos</span></div>')
+    lines.append(f'  <div class="stat-card"><span class="stat-number">{len(terms)}</span><span class="stat-label">Términos Publicados</span></div>')
+    lines.append('</div>\n')
+
+    # Cuadrícula de tarjetas de colaboradores
+    lines.append('<div class="contributors-grid">')
+    for c in sorted_contributors:
+        num_terms = len(c["terms"])
+        terms_count_str = f"{num_terms} término" if num_terms == 1 else f"{num_terms} términos"
+        
+        avatar_html = ""
+        profile_link_html = ""
+        
+        if c["is_github"]:
+            avatar_url = f"https://github.com/{html.escape(c['username'])}.png?size=140"
+            avatar_html = f'<img class="contributor-avatar-img" src="{avatar_url}" alt="{html.escape(c["handle"])}" loading="lazy" />'
+            profile_link_html = f'<a href="https://github.com/{html.escape(c["username"])}" target="_blank" class="contributor-name-link">👤 {html.escape(c["handle"])}</a>'
+        else:
+            avatar_html = '<div class="contributor-avatar-fallback">👤</div>'
+            profile_link_html = f'<span class="contributor-name-link">{html.escape(c["handle"])}</span>'
+
+        terms_pills = []
+        for t in c["terms"]:
+            term_title = html.escape(str(t["title"]))
+            # En la página de colaboradores, el link relativo a los términos es ../terms/{slug}/
+            term_link = f"../terms/{t['slug']}/"
+            terms_pills.append(f'<a href="{term_link}" class="contributor-term-pill">{term_title}</a>')
+
+        lines.append('  <div class="contributor-card">')
+        lines.append('    <div class="contributor-header">')
+        lines.append(f'      <div class="contributor-avatar-wrap">{avatar_html}</div>')
+        lines.append('      <div class="contributor-info">')
+        lines.append(f'        <h3 class="contributor-name">{profile_link_html}</h3>')
+        lines.append(f'        <span class="contributor-badge-count">{terms_count_str}</span>')
+        lines.append('      </div>')
+        lines.append('    </div>')
+        lines.append('    <div class="contributor-terms-section">')
+        lines.append('      <span class="contributor-terms-label">Términos aportados:</span>')
+        lines.append(f'      <div class="contributor-terms-list">{" ".join(terms_pills)}</div>')
+        lines.append('    </div>')
+        lines.append('  </div>')
+
+    lines.append('</div>\n')
+
+    return "\n".join(lines)
+
 def on_page_markdown(markdown, page, config, files):
     """Hook que intercepta el contenido markdown antes de renderizar la página."""
+    docs_dir = config["docs_dir"]
     if page.file.src_path == "index.md":
-        docs_dir = config["docs_dir"]
         index_html = generate_index_markdown(docs_dir)
         if "<!-- GLOSSARY_INDEX -->" in markdown:
             return markdown.replace("<!-- GLOSSARY_INDEX -->", index_html)
         else:
             return markdown + "\n\n## 📚 Explorador de Términos\n\n" + index_html
+    elif page.file.src_path == "colaboradores.md":
+        contributors_html = generate_contributors_markdown(docs_dir)
+        if "<!-- CONTRIBUTORS_LIST -->" in markdown:
+            return markdown.replace("<!-- CONTRIBUTORS_LIST -->", contributors_html)
+        else:
+            return markdown + "\n\n" + contributors_html
     return markdown
 
 if __name__ == "__main__":
     import sys
     base_dir = Path(__file__).resolve().parent.parent
     docs_path = base_dir / "docs"
-    print("--- Test de Generación del Índice del Glosario ---")
-    print(generate_index_markdown(docs_path))
+    print("--- Test de Generación de Índice ---")
+    print(generate_index_markdown(docs_path)[:300])
+    print("\n--- Test de Generación de Colaboradores ---")
+    print(generate_contributors_markdown(docs_path)[:500])
