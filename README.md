@@ -1,6 +1,6 @@
-# 🛡️ Glosario colaborativo de ciberseguridad
+# 🛡️ Glosario colaborativo de ciberseguridad — IES Celia Viñas
 
-Repositorio colaborativo para crear, organizar y mantener una enciclopedia técnica de ciberseguridad mediante contribuciones del alumnado con **Pull Requests**.
+Repositorio colaborativo para crear, organizar y mantener una enciclopedia técnica de ciberseguridad mediante contribuciones del alumnado del **IES Celia Viñas** con **Pull Requests**.
 
 ---
 

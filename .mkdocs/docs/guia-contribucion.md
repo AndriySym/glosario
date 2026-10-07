@@ -1,11 +1,11 @@
 ---
 title: "Guía de contribución"
-description: "Guía paso a paso para que el alumnado contribuya con nuevos términos al Glosario de Ciberseguridad."
+description: "Guía paso a paso para que el alumnado contribuya con nuevos términos al Glosario de Ciberseguridad del IES Celia Viñas."
 ---
 
 # 🚀 Guía de contribución al glosario
 
-¡Bienvenido a la guía de contribución del **Glosario colaborativo de ciberseguridad**!
+¡Bienvenido a la guía de contribución del **Glosario colaborativo de ciberseguridad del IES Celia Viñas**!
 
 Este proyecto utiliza la metodología **Docs-as-Code** (*Documentación como código*). Todo el glosario se gestiona mediante control de versiones en Git y se publica automáticamente en GitHub Pages tras validar cada aportación mediante **Pull Requests (PR)**.
 
