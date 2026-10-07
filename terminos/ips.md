@@ -1,7 +1,7 @@
 ---
 title: "Sistema de Prevención de Intrusiones (IPS)"
 category: "Redes / Seguridad de Red"
-author: "@ciberdiu"
+author: "@Mole43"
 tags:
   - ciberseguridad
   - redes
@@ -20,7 +20,7 @@ summary: "Sistema de seguridad de red que monitoriza el tráfico en tiempo real 
   </div>
   <div class="term-meta-item">
     <span class="term-meta-label">Autor / Colaborador</span>
-    <span class="term-meta-value"><a href="https://github.com/ciberdiu" target="_blank">@ciberdiu</a></span>
+    <span class="term-meta-value"><a href="https://github.com/Mole43" target="_blank">@Mole43</a></span>
   </div>
 </div>
 

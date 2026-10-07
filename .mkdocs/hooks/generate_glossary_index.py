@@ -292,7 +292,7 @@ def generate_contributors_markdown(docs_dir):
         
         if c["is_github"]:
             avatar_url = f"https://github.com/{html.escape(c['username'])}.png?size=140"
-            avatar_html = f'<img class="contributor-avatar-img" src="{avatar_url}" alt="{html.escape(c["handle"])}" loading="lazy" />'
+            avatar_html = f'<img class="contributor-avatar-img" src="{avatar_url}" alt="{html.escape(c["handle"])}" loading="lazy" onerror="this.onerror=null; this.parentElement.innerHTML=\'<div class=&quot;contributor-avatar-fallback&quot;>👤</div>\';" />'
             profile_link_html = f'<a href="https://github.com/{html.escape(c["username"])}" target="_blank" class="contributor-name-link">👤 {html.escape(c["handle"])}</a>'
         else:
             avatar_html = '<div class="contributor-avatar-fallback">👤</div>'
