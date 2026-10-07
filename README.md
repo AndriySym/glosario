@@ -1,4 +1,4 @@
-# 🛡️ Glosario colaborativo de ciberseguridad — IES Celia Viñas
+# 🛡️ Glosario colaborativo de ciberseguridad
 
 Repositorio colaborativo para crear, organizar y mantener una enciclopedia técnica de ciberseguridad mediante contribuciones del alumnado del **IES Celia Viñas** con **Pull Requests**.
 
@@ -24,7 +24,7 @@ glosario/
 
 ---
 
-## 🚀 Cómo contribuir con un nuevo término (paso a paso)
+## 🚀 Cómo contribuir con un nuevo término
 
 ### 1. Haz un fork del repositorio
 Pulsa el botón **Fork** (arriba a la derecha en GitHub) para copiar el repositorio a tu cuenta personal.
@@ -80,7 +80,7 @@ git checkout -b feat/nombre-del-termino
 
 ---
 
-## 🐳 (Opcional) Probar la web en local con Docker
+## 🐳 Probar la web en local con Docker (Opcional)
 
 Si deseas previsualizar cómo se renderiza la web completa en tu navegador:
 
