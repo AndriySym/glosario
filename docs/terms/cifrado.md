@@ -3,24 +3,24 @@ title: "Cifrado"
 category: "Criptografía"
 author: "@mgarlop"
 tags:
-	- ciberseguridad
-	- criptografia
-	- cifrado-simetrico
-	- cifrado-asimetrico
+  - ciberseguridad
+  - criptografia
+  - cifrado-simetrico
+  - cifrado-asimetrico
 summary: "Proceso que transforma datos legibles en texto cifrado mediante algoritmos y claves, para proteger su confidencialidad."
 ---
 
 # Cifrado
 
 <div class="term-meta-box">
-	<div class="term-meta-item">
-		<span class="term-meta-label">Categoría</span>
-		<span class="term-meta-value">Criptografía</span>
-	</div>
-	<div class="term-meta-item">
-		<span class="term-meta-label">Autor / Colaborador</span>
-		<span class="term-meta-value"><a href="https://github.com/mgarlop" target="_blank">@mgarlop</a></span>
-	</div>
+  <div class="term-meta-item">
+    <span class="term-meta-label">Categoría</span>
+    <span class="term-meta-value">Criptografía</span>
+  </div>
+  <div class="term-meta-item">
+    <span class="term-meta-label">Autor / Colaborador</span>
+    <span class="term-meta-value"><a href="https://github.com/mgarlop" target="_blank">@mgarlop</a></span>
+  </div>
 </div>
 
 ## 📖 Definición
@@ -30,7 +30,7 @@ El **cifrado** es el proceso criptográfico que transforma información legible 
 Se utiliza para proteger la **confidencialidad** de datos almacenados (en reposo) o transmitidos (en tránsito). Por sí solo, el cifrado no garantiza que los datos no hayan sido modificados ni quién los creó; para esas propiedades se emplean mecanismos de autenticación e integridad, como los códigos de autenticación de mensajes o las firmas digitales.
 
 !!! note "Cifrar no es codificar ni hacer hash"
-		La codificación, como Base64, solo cambia la representación de los datos y no requiere una clave secreta. Un hash criptográfico es una función unidireccional y no está diseñado para recuperar el contenido original. El cifrado, en cambio, es reversible con la clave correspondiente.
+    La codificación, como Base64, solo cambia la representación de los datos y no requiere una clave secreta. Un hash criptográfico es una función unidireccional y no está diseñado para recuperar el contenido original. El cifrado, en cambio, es reversible con la clave correspondiente.
 
 ---
 
@@ -39,9 +39,9 @@ Se utiliza para proteger la **confidencialidad** de datos almacenados (en reposo
 1. **Algoritmo y clave**: El algoritmo define las operaciones criptográficas; la clave controla el resultado. La seguridad debe depender de proteger las claves, no de mantener secreto el algoritmo.
 2. **Cifrado y descifrado**: El algoritmo combina el texto claro con la clave para producir texto cifrado. El descifrado utiliza la clave correspondiente para recuperar los datos.
 3. **Elección del esquema**:
-	 - **Cifrado simétrico**: utiliza la misma clave secreta para cifrar y descifrar. Es eficiente para grandes volúmenes de datos; ejemplos actuales incluyen AES-GCM y ChaCha20-Poly1305.
-	 - **Cifrado asimétrico**: utiliza un par de claves relacionadas: una pública y una privada. La clave pública puede cifrar datos que solo la privada correspondiente descifra. Se usa, entre otras cosas, para establecer claves y proteger comunicaciones.
-	 - **Cifrado autenticado**: además de confidencialidad, permite detectar modificaciones. Para datos de aplicación, se prefieren modos AEAD como AES-GCM o ChaCha20-Poly1305.
+   - **Cifrado simétrico**: utiliza la misma clave secreta para cifrar y descifrar. Es eficiente para grandes volúmenes de datos; ejemplos actuales incluyen AES-GCM y ChaCha20-Poly1305.
+   - **Cifrado asimétrico**: utiliza un par de claves relacionadas: una pública y una privada. La clave pública puede cifrar datos que solo la privada correspondiente descifra. Se usa, entre otras cosas, para establecer claves y proteger comunicaciones.
+   - **Cifrado autenticado**: además de confidencialidad, permite detectar modificaciones. Para datos de aplicación, se prefieren modos AEAD como AES-GCM o ChaCha20-Poly1305.
 
 ---
 
@@ -51,32 +51,32 @@ Base64 no protege un secreto: cualquiera puede decodificarlo. Para información 
 
 === "Escenario Incorrecto: Base64"
 
-		```python
-		import base64
+    ```python
+    import base64
 
-		secreto = "credencial-confidencial"
-		representacion = base64.b64encode(secreto.encode("utf-8"))
+    secreto = "credencial-confidencial"
+    representacion = base64.b64encode(secreto.encode("utf-8"))
 
-		# Esto es reversible sin ninguna clave y no proporciona confidencialidad.
-		print(base64.b64decode(representacion).decode("utf-8"))
-		```
+    # Esto es reversible sin ninguna clave y no proporciona confidencialidad.
+    print(base64.b64decode(representacion).decode("utf-8"))
+    ```
 
 === "Escenario Seguro: Cifrado Autenticado"
 
-		```python
-		from cryptography.fernet import Fernet
+    ```python
+    from cryptography.fernet import Fernet
 
-		# En una aplicación real, genera la clave una vez y guárdala
-		# en un gestor de secretos, separada de los datos cifrados.
-		clave = Fernet.generate_key()
-		cifrador = Fernet(clave)
+    # En una aplicación real, genera la clave una vez y guárdala
+    # en un gestor de secretos, separada de los datos cifrados.
+    clave = Fernet.generate_key()
+    cifrador = Fernet(clave)
 
-		texto_claro = b"informacion confidencial"
-		texto_cifrado = cifrador.encrypt(texto_claro)
-		texto_recuperado = cifrador.decrypt(texto_cifrado)
-		```
+    texto_claro = b"informacion confidencial"
+    texto_cifrado = cifrador.encrypt(texto_claro)
+    texto_recuperado = cifrador.decrypt(texto_cifrado)
+    ```
 
-		Fernet, de la biblioteca `cryptography`, proporciona cifrado simétrico autenticado. Generar una clave nueva cada vez que se ejecuta el programa no es adecuado para datos que deban descifrarse después: la clave debe gestionarse y respaldarse de forma segura.
+    Fernet, de la biblioteca `cryptography`, proporciona cifrado simétrico autenticado. Generar una clave nueva cada vez que se ejecuta el programa no es adecuado para datos que deban descifrarse después: la clave debe gestionarse y respaldarse de forma segura.
 
 ---
 

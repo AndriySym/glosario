@@ -7,6 +7,7 @@ y construye un índice alfabético, visual y completamente responsivo en docs/in
 
 import os
 import re
+import html
 import unicodedata
 import yaml
 from pathlib import Path
@@ -22,8 +23,21 @@ def normalize_letter(char):
         return base_char
     return "#"
 
+def clean_summary_text(text):
+    """Elimina etiquetas HTML y sintaxis markdown residual para evitar roturas del DOM."""
+    if not text:
+        return ""
+    # Eliminar bloques HTML completos
+    cleaned = re.sub(r"<[^>]+>", "", text)
+    # Eliminar formato markdown como negritas, cursivas, enlaces y encabezados
+    cleaned = re.sub(r"\[([^\]]+)\]\([^\)]+\)", r"\1", cleaned)
+    cleaned = re.sub(r"[*_`#~]", "", cleaned)
+    # Normalizar espacios en blanco
+    cleaned = " ".join(cleaned.split()).strip()
+    return cleaned
+
 def parse_term_file(filepath):
-    """Extrae el frontmatter YAML y el resumen de un archivo de término markdown."""
+    """Extrae el frontmatter YAML y el resumen de un archivo de término markdown de forma segura."""
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
 
@@ -33,8 +47,9 @@ def parse_term_file(filepath):
     # Comprobar si tiene frontmatter YAML (--- ... ---)
     match = re.match(r"^---\s*\n(.*?)\n---\s*\n(.*)$", content, re.DOTALL)
     if match:
+        raw_yaml = match.group(1).expandtabs(2)
         try:
-            frontmatter = yaml.safe_load(match.group(1)) or {}
+            frontmatter = yaml.safe_load(raw_yaml) or {}
         except Exception as e:
             print(f"[Hook Glosario] Error al parsear YAML en {filepath}: {e}")
         body = match.group(2)
@@ -47,17 +62,25 @@ def parse_term_file(filepath):
         # Intentar extraer del primer encabezado # Titulo
         h1_match = re.search(r"^#\s+(.+)$", body, re.MULTILINE)
         if h1_match:
-            title = h1_match.group(1).strip()
+            title = clean_summary_text(h1_match.group(1).strip())
         else:
             title = slug.replace("-", " ").title()
 
     summary = frontmatter.get("summary")
-    if not summary:
-        # Extraer el primer párrafo no vacío
-        paragraphs = [p.strip() for p in body.split("\n\n") if p.strip() and not p.strip().startswith("#")]
-        summary = paragraphs[0] if paragraphs else "Sin descripción disponible."
-        if len(summary) > 200:
-            summary = summary[:197] + "..."
+    if summary:
+        summary = clean_summary_text(str(summary))
+    else:
+        # Extraer el primer párrafo no vacío que no sea un bloque HTML ni encabezado
+        paragraphs = [p.strip() for p in body.split("\n\n") if p.strip()]
+        valid_paragraphs = [
+            clean_summary_text(p) for p in paragraphs
+            if not p.strip().startswith(("#", "<div", "!!!", "===", ">", "```", "---"))
+            and clean_summary_text(p)
+        ]
+        summary = valid_paragraphs[0] if valid_paragraphs else "Sin descripción disponible."
+
+    if len(summary) > 200:
+        summary = summary[:197] + "..."
 
     return {
         "slug": slug,
@@ -145,29 +168,33 @@ def generate_index_markdown(docs_dir):
 
         lines.append('<div class="terms-card-grid">')
         for term in grouped[letter]:
-            cat_badge = f'<span class="term-badge badge-category">{term["category"]}</span>' if term["category"] else ''
+            cat_safe = html.escape(str(term["category"]))
+            title_safe = html.escape(str(term["title"]))
+            summary_safe = html.escape(str(term["summary"]))
+            
+            cat_badge = f'<span class="term-badge badge-category">{cat_safe}</span>' if term["category"] else ''
             
             author_html = ""
             if term["author"]:
-                author_val = term["author"]
+                author_val = str(term["author"]).strip()
                 if author_val.startswith("@"):
                     gh_user = author_val.lstrip("@")
-                    author_html = f'<a href="https://github.com/{gh_user}" target="_blank" class="author-tag">👤 {author_val}</a>'
+                    author_html = f'<a href="https://github.com/{html.escape(gh_user)}" target="_blank" class="author-tag">👤 {html.escape(author_val)}</a>'
                 else:
-                    author_html = f'<span class="author-tag">👤 {author_val}</span>'
+                    author_html = f'<span class="author-tag">👤 {html.escape(author_val)}</span>'
 
             tag_html = ""
             if term["tags"]:
-                tags_formatted = [f'<span class="tag-pill">#{t}</span>' for t in term["tags"]]
+                tags_formatted = [f'<span class="tag-pill">#{html.escape(str(t).strip())}</span>' for t in term["tags"]]
                 tag_html = f'<div class="term-tags">{" ".join(tags_formatted)}</div>'
 
             lines.append('  <div class="term-card">')
             lines.append('    <div class="term-card-header">')
-            lines.append(f'      <h3 class="term-card-title"><a href="{term["rel_path"]}">{term["title"]}</a></h3>')
+            lines.append(f'      <h3 class="term-card-title"><a href="{term["rel_path"]}">{title_safe}</a></h3>')
             if cat_badge:
                 lines.append(f'      <div class="term-badges">{cat_badge}</div>')
             lines.append('    </div>')
-            lines.append(f'    <p class="term-card-summary">{term["summary"]}</p>')
+            lines.append(f'    <p class="term-card-summary">{summary_safe}</p>')
             lines.append('    <div class="term-card-footer">')
             lines.append(f'      {author_html}')
             lines.append(f'      {tag_html}')
