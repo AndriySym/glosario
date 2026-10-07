@@ -248,8 +248,8 @@ def generate_contributors_markdown(docs_dir):
 
     for term in terms:
         raw_author = str(term["author"]).strip() if term["author"] else "Comunidad"
-        # Separar múltiples autores si vienen separados por comas o 'y'
-        author_tokens = re.split(r"[,y]\s*", raw_author)
+        # Separar múltiples autores si vienen separados por comas, 'y', '&' o 'and' como palabras independientes
+        author_tokens = re.split(r"\s*,\s*|\s+(?:y|and|&)\s+", raw_author)
         for auth in author_tokens:
             auth = auth.strip()
             if not auth:
