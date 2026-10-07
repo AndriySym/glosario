@@ -1,5 +1,5 @@
 ---
-title: SSH (Secure Shell)
+title: "SSH (Secure Shell)"
 category: "Redes"
 author: "@lizank176"
 tags:
@@ -32,12 +32,12 @@ Fue creado en 1995 por Tatu Ylönen tras un ataque de captura de contraseñas en
 
 Además del acceso a una terminal remota, SSH permite transferir archivos (**SFTP**, **SCP**), crear túneles y reenviar puertos (*port forwarding*), y autenticar operaciones automatizadas (Git, Ansible, copias de seguridad).
 
-!!! note "Nota Importante"
+!!! note "Nota importante"
     SSH cifra el canal, pero no vuelve seguro un servidor mal configurado. Un servicio SSH expuesto a Internet con contraseñas débiles es uno de los vectores de ataque más comunes (fuerza bruta, *credential stuffing*). Además, **cambiar el puerto 22 no es una medida de seguridad real**, solo reduce el ruido en los registros.
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 Una conexión SSH sigue una arquitectura cliente-servidor y se establece en varias fases:
 
 1. **Negociación de versión y algoritmos**: cliente y servidor acuerdan la versión del protocolo y los algoritmos de intercambio de claves, cifrado, MAC y firma.
@@ -56,14 +56,14 @@ Una conexión SSH sigue una arquitectura cliente-servidor y se establece en vari
 
 ---
 
-## 🎯 Ejemplo Práctico o Escenario de Demostración
+## 🎯 Ejemplo práctico o escenario de demostración
 Configuración del servidor OpenSSH (`/etc/ssh/sshd_config`) en un servidor expuesto a Internet.
 
-=== "Escenario Vulnerable / Incorrecto"
+=== "Escenario vulnerable / incorrecto"
 
     Acceso de root con contraseña, sin límite de intentos y con funciones innecesarias activas:
 
-```bash
+    ```bash
     # /etc/ssh/sshd_config  (configuración insegura)
     PermitRootLogin yes
     PasswordAuthentication yes
@@ -71,15 +71,15 @@ Configuración del servidor OpenSSH (`/etc/ssh/sshd_config`) en un servidor expu
     MaxAuthTries 20
     X11Forwarding yes
     # Sin restricción de usuarios ni de origen
-```
+    ```
 
     Un atacante puede lanzar fuerza bruta contra `root` desde cualquier lugar y, si acierta, obtiene control total del sistema.
 
-=== "Escenario Seguro / Remediado"
+=== "Escenario seguro / remediado"
 
     Solo claves públicas, sin acceso directo de root y con superficie reducida:
 
-```bash
+    ```bash
     # /etc/ssh/sshd_config  (configuración bastionada)
     PermitRootLogin no
     PasswordAuthentication no
@@ -94,23 +94,23 @@ Configuración del servidor OpenSSH (`/etc/ssh/sshd_config`) en un servidor expu
     ClientAliveInterval 300
     ClientAliveCountMax 2
     LogLevel VERBOSE
-```
+    ```
 
     Generación de una clave moderna en el cliente y verificación de la configuración antes de recargar:
 
-```bash
+    ```bash
     ssh-keygen -t ed25519 -a 100 -C "usuario@equipo"
     ssh-copy-id -i ~/.ssh/id_ed25519.pub admin@servidor
 
     sudo sshd -t && sudo systemctl reload sshd
-```
+    ```
 
     !!! warning "Antes de desactivar contraseñas"
         Comprueba en **otra sesión abierta** que el acceso con clave funciona, o podrías bloquearte el acceso al servidor.
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 
 - [x] **Autenticación por clave pública**: desactivar las contraseñas y proteger las claves privadas con *passphrase*.
 - [x] **Deshabilitar el acceso directo de root**: entrar con un usuario sin privilegios y elevar con `sudo`.
@@ -126,7 +126,7 @@ Configuración del servidor OpenSSH (`/etc/ssh/sshd_config`) en un servidor expu
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 - [OpenSSH: documentación oficial](https://www.openssh.com/manual.html)
 - [RFC 4251: The Secure Shell (SSH) Protocol Architecture](https://www.rfc-editor.org/rfc/rfc4251)
 - [NIST IR 7966: Security of Interactive and Automated Access Management Using SSH](https://csrc.nist.gov/pubs/ir/7966/final)

@@ -1,5 +1,5 @@
 ---
-title: "GPO (Objetos de Política de Grupo)"
+title: "GPO (Objetos de directiva de grupo)"
 category: "Identidad y Administración de Sistemas"
 author: "@AndriySym"
 tags:
@@ -11,7 +11,7 @@ tags:
 summary: "Conjunto centralizado de directivas que permite administrar la configuración y seguridad de usuarios y equipos Windows en un dominio o de forma local."
 ---
 
-# GPO (Objetos de Política de Grupo)
+# GPO (Objetos de directiva de grupo)
 
 <div class="term-meta-box">
   <div class="term-meta-item">
@@ -39,7 +39,7 @@ Una GPO de dominio se compone de información almacenada en Active Directory y d
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 
 1. **Creación y almacenamiento**: Un administrador crea o edita la GPO con herramientas como Group Policy Management Console (GPMC). Sus atributos se almacenan en Active Directory y su plantilla de directiva en SYSVOL.
 2. **Vinculación y alcance**: La GPO se vincula a un sitio, dominio u OU. El filtrado de seguridad determina qué usuarios o equipos pueden aplicarla; el filtrado WMI puede restringirla según las características del equipo.
@@ -48,7 +48,7 @@ Una GPO de dominio se compone de información almacenada en Active Directory y d
 
 ---
 
-## 🎯 Ejemplo Práctico o Escenario de Demostración
+## 🎯 Ejemplo práctico o escenario de demostración
 
 Un equipo de seguridad necesita exigir el bloqueo automático de sesión en los equipos de administración. Aplicar el ajuste a todo el dominio puede afectar a usuarios y equipos que no forman parte del alcance previsto.
 
@@ -75,7 +75,7 @@ Un equipo de seguridad necesita exigir el bloqueo automático de sesión en los 
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 
 - [x] **Aplicar mínimo privilegio**: Restringir quién puede crear, editar, vincular o delegar GPO; revisar periódicamente permisos y delegaciones.
 - [x] **Limitar el alcance**: Vincular cada directiva a la OU adecuada y usar filtrado de seguridad explícito. Evitar filtros WMI complejos si una estructura de OUs clara resuelve el caso.
@@ -86,7 +86,7 @@ Un equipo de seguridad necesita exigir el bloqueo automático de sesión en los 
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 
 - [Microsoft Learn: Group Policy overview](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-overview)
 - [Microsoft Learn: Group Policy processing and precedence](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/group-policy/group-policy-processing)

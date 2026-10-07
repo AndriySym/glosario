@@ -1,5 +1,5 @@
 ---
-title: "SOC (Centro de Operaciones de Seguridad)"
+title: "SOC (Centro de operaciones de seguridad)"
 category: "Operaciones y Monitorización de Seguridad"
 author: "@An1Enrique"
 tags:
@@ -12,7 +12,7 @@ tags:
 summary: "Función o equipo encargado de monitorizar continuamente los sistemas de una organización, detectar amenazas y coordinar la respuesta ante incidentes de seguridad."
 ---
 
-# SOC (Centro de Operaciones de Seguridad)
+# SOC (Centro de operaciones de seguridad)
 
 <div class="term-meta-box">
   <div class="term-meta-item">
@@ -21,7 +21,7 @@ summary: "Función o equipo encargado de monitorizar continuamente los sistemas 
   </div>
   <div class="term-meta-item">
     <span class="term-meta-label">Denominación</span>
-    <span class="term-meta-value">Security Operations Center (SOC) / Centro de Operaciones de Seguridad</span>
+    <span class="term-meta-value">Security Operations Center (SOC) / Centro de operaciones de seguridad</span>
   </div>
   <div class="term-meta-item">
     <span class="term-meta-label">Autor</span>
@@ -40,7 +40,7 @@ Un SOC combina personas, procesos y tecnología. Puede operar con personal inter
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 
 El funcionamiento de un SOC se basa en un ciclo continuo de visibilidad, análisis y respuesta:
 
@@ -64,18 +64,18 @@ Los niveles de operación suelen organizarse en **L1** (triaje y clasificación)
 
 ---
 
-## 🎯 Ejemplo Práctico: Detección de una cuenta comprometida
+## 🎯 Ejemplo práctico: detección de una cuenta comprometida
 
 Una cuenta corporativa inicia sesión desde una ubicación inusual y, pocos minutos después, descarga un volumen elevado de información y crea una regla de reenvío de correo.
 
-=== "❌ Operación Deficiente"
+=== "❌ Operación deficiente"
 
     - Cada sistema conserva sus alertas sin enviarlas a un punto común de análisis.
     - No existe una línea de guardia ni un procedimiento para clasificar la alerta.
     - El equipo deshabilita la cuenta sin preservar evidencias ni comprobar otras sesiones activas.
     - No se revisan las reglas de detección ni se documenta el incidente, por lo que el mismo patrón puede repetirse.
 
-=== "✅ Operación de un SOC Maduro"
+=== "✅ Operación de un SOC maduro"
 
     1. El proveedor de identidad, el correo y el proxy envían telemetría al SIEM.
     2. Una regla correlaciona el inicio de sesión anómalo, la descarga masiva y la creación de la regla de reenvío, y asigna una prioridad alta.
@@ -85,7 +85,7 @@ Una cuenta corporativa inicia sesión desde una ubicación inusual y, pocos minu
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 
 - [x] **Definir un modelo operativo**: Establecer responsabilidades, turnos, niveles de escalado, acuerdos de nivel de servicio (SLA) y criterios para declarar y comunicar incidentes.
 - [x] **Centralizar telemetría útil**: Integrar fuentes relevantes, sincronizar el tiempo, proteger los registros frente a modificaciones y definir periodos de retención acordes con las necesidades legales y operativas.
@@ -97,7 +97,7 @@ Una cuenta corporativa inicia sesión desde una ubicación inusual y, pocos minu
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 
 - [NIST SP 800-61 Rev. 2: Computer Security Incident Handling Guide](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final)
 - [NIST Cybersecurity Framework 2.0](https://www.nist.gov/cyberframework)

@@ -34,7 +34,7 @@ Se utiliza para proteger la **confidencialidad** de datos almacenados (en reposo
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 
 1. **Algoritmo y clave**: El algoritmo define las operaciones criptográficas; la clave controla el resultado. La seguridad debe depender de proteger las claves, no de mantener secreto el algoritmo.
 2. **Cifrado y descifrado**: El algoritmo combina el texto claro con la clave para producir texto cifrado. El descifrado utiliza la clave correspondiente para recuperar los datos.
@@ -45,11 +45,11 @@ Se utiliza para proteger la **confidencialidad** de datos almacenados (en reposo
 
 ---
 
-## 🎯 Ejemplo Práctico o Escenario de Demostración
+## 🎯 Ejemplo práctico o escenario de demostración
 
 Base64 no protege un secreto: cualquiera puede decodificarlo. Para información confidencial, utiliza una biblioteca criptográfica mantenida y protege la clave por separado de los datos cifrados.
 
-=== "Escenario Incorrecto: Base64"
+=== "Escenario incorrecto: Base64"
 
     ```python
     import base64
@@ -61,7 +61,7 @@ Base64 no protege un secreto: cualquiera puede decodificarlo. Para información 
     print(base64.b64decode(representacion).decode("utf-8"))
     ```
 
-=== "Escenario Seguro: Cifrado Autenticado"
+=== "Escenario seguro: cifrado autenticado"
 
     ```python
     from cryptography.fernet import Fernet
@@ -80,7 +80,7 @@ Base64 no protege un secreto: cualquiera puede decodificarlo. Para información 
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 
 - [x] **Usar bibliotecas y algoritmos reconocidos**: evitar diseñar algoritmos propios y no utilizar algoritmos obsoletos como DES o modos inseguros.
 - [x] **Proteger las claves**: almacenarlas en un gestor de secretos o módulo de seguridad, limitar su acceso y establecer procesos de rotación y recuperación.
@@ -90,7 +90,7 @@ Base64 no protege un secreto: cualquiera puede decodificarlo. Para información 
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 
 - [NIST SP 800-57 Part 1 Rev. 5: Key Management](https://csrc.nist.gov/pubs/sp/800/57/pt1/r5/final)
 - [NIST SP 800-38D: AES-GCM](https://csrc.nist.gov/pubs/sp/800/38/d/final)

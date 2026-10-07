@@ -39,7 +39,7 @@ pfSense permite definir políticas de tráfico entre interfaces y mantener el es
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 
 1. **Interfaces y zonas de red**: Se asignan interfaces a redes como WAN (exterior) y LAN (interior). También pueden crearse VLAN para separar, por ejemplo, equipos de usuarios, servidores e IoT.
 2. **Reglas de firewall**: Las reglas se aplican normalmente en la interfaz por la que entra el tráfico. Evalúan datos como dirección, protocolo, puertos y destino para permitir o bloquear conexiones. En general, el tráfico entrante que no coincide con una regla de permiso se bloquea.
@@ -49,7 +49,7 @@ pfSense permite definir políticas de tráfico entre interfaces y mantener el es
 
 ---
 
-## 🎯 Ejemplo Práctico o Escenario de Demostración
+## 🎯 Ejemplo práctico o escenario de demostración
 
 En una red doméstica o de laboratorio, pfSense puede separar la red interna de Internet. Un conjunto inicial de políticas podría ser:
 
@@ -69,7 +69,7 @@ En una red doméstica o de laboratorio, pfSense puede separar la red interna de 
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 
 - [x] **Restringir la administración**: No publiques la GUI ni SSH en WAN. Limita su acceso a una red de gestión o VPN y a direcciones de origen autorizadas.
 - [x] **Aplicar mínimo privilegio a las reglas**: Evita reglas amplias como «cualquier origen a cualquier destino»; documenta las excepciones y elimina las que ya no sean necesarias.
@@ -80,7 +80,7 @@ En una red doméstica o de laboratorio, pfSense puede separar la red interna de 
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 
 - [Documentación oficial de pfSense](https://docs.netgate.com/pfsense/en/latest/)
 - [Documentación oficial: reglas de firewall](https://docs.netgate.com/pfsense/en/latest/firewall/)

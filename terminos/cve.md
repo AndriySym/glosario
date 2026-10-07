@@ -35,12 +35,12 @@ Conviene distinguir dos conceptos que CVE recoge:
 - **Vulnerabilidad**: un fallo en la lógica, el diseño o la implementación que puede ser aprovechado para comprometer la confidencialidad, integridad o disponibilidad de un sistema.
 - **Exposición**: una configuración incorrecta o un error que facilita el acceso indebido a datos o capacidades del sistema, sin ser necesariamente un fallo de código.
 
-!!! note "Nota Importante"
+!!! note "Nota importante"
     CVE **solo identifica y describe** la vulnerabilidad. No indica su gravedad ni cómo explotarla. La puntuación de riesgo (**CVSS**), la clasificación del tipo de debilidad (**CWE**) y la lista de productos afectados (**CPE**) son estándares complementarios que suelen añadirse sobre el identificador CVE, por ejemplo en la **NVD** (*National Vulnerability Database*, del NIST).
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 El ciclo de vida de un CVE involucra a varios actores: investigadores, fabricantes, **CNAs** (*CVE Numbering Authorities*, organizaciones autorizadas a asignar IDs), el programa CVE y bases de datos que enriquecen el registro.
 
 1. **Descubrimiento y reporte**: un investigador, un cliente o el propio fabricante identifica una vulnerabilidad y la comunica de forma responsable (*coordinated disclosure*) al fabricante o a una CNA.
@@ -57,10 +57,10 @@ El ciclo de vida de un CVE involucra a varios actores: investigadores, fabricant
 
 ---
 
-## 🎯 Ejemplo Práctico o Escenario de Demostración
+## 🎯 Ejemplo práctico o escenario de demostración
 Un caso paradigmático es **Log4Shell** (`CVE-2021-44228`), una vulnerabilidad de ejecución remota de código en la biblioteca Java **Apache Log4j 2** con puntuación CVSS **10.0**. Una organización que no gestiona CVEs sigue usando la versión afectada sin saberlo; otra que sí lo hace detecta el ID en su inventario de dependencias y actualiza.
 
-=== "Escenario Vulnerable / Incorrecto"
+=== "Escenario vulnerable / incorrecto"
 
     ```xml
     <!-- pom.xml: dependencia fijada a una versión afectada por CVE-2021-44228 -->
@@ -73,7 +73,7 @@ Un caso paradigmático es **Log4Shell** (`CVE-2021-44228`), una vulnerabilidad d
 
     Sin inventario de componentes ni escaneo de dependencias, nadie en la organización sabe que este servicio es vulnerable hasta que es explotado.
 
-=== "Escenario Seguro / Remediado"
+=== "Escenario seguro / remediado"
 
     ```xml
     <!-- pom.xml: versión corregida tras consultar el CVE y el aviso del fabricante -->
@@ -92,7 +92,7 @@ Un caso paradigmático es **Log4Shell** (`CVE-2021-44228`), una vulnerabilidad d
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 Recomendaciones para gestionar correctamente las vulnerabilidades identificadas mediante CVE (alineadas con OWASP A06:2021 *Vulnerable and Outdated Components*, NIST SP 800-40 y los controles CIS):
 
 - [x] **Mantener un inventario de activos y software (SBOM)**: no se puede parchear lo que no se sabe que existe. Generar SBOM en formato CycloneDX o SPDX.
@@ -105,7 +105,7 @@ Recomendaciones para gestionar correctamente las vulnerabilidades identificadas 
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 - [CVE Program (sitio oficial)](https://www.cve.org)
 - [NVD - National Vulnerability Database (NIST)](https://nvd.nist.gov)
 - [CISA Known Exploited Vulnerabilities Catalog](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)

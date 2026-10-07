@@ -1,5 +1,5 @@
 ---
-title: "Sistema de Prevención de Intrusiones (IPS)"
+title: "Sistema de prevención de intrusiones (IPS)"
 category: "Redes / Seguridad de Red"
 author: "@Mole43"
 tags:
@@ -11,7 +11,7 @@ tags:
 summary: "Sistema de seguridad de red que monitoriza el tráfico en tiempo real y bloquea actividad maliciosa para prevenir intrusiones y ataques."
 ---
 
-# Sistema de Prevención de Intrusiones (IPS)
+# Sistema de prevención de intrusiones (IPS)
 
 <div class="term-meta-box">
   <div class="term-meta-item">
@@ -35,7 +35,7 @@ El IPS suele desplegarse en un punto estratégico de la red, como entre el perí
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 
 El funcionamiento de un IPS se basa en la combinación de inspección del tráfico, análisis de contenido y respuesta automatizada:
 
@@ -53,7 +53,7 @@ En otras palabras, un IPS actúa como una capa activa de defensa en profundidad:
 
 ---
 
-## 🎯 Ejemplo Práctico o Escenario de Demostración
+## 🎯 Ejemplo práctico o escenario de demostración
 
 Supongamos que un atacante intenta escanear puertos de un servidor interno o lanzar un ataque de fuerza bruta contra un servicio web. El IPS puede detectar patrones típicos del comportamiento malicioso.
 
@@ -77,7 +77,7 @@ Este tipo de respuesta es típica en entornos empresariales donde la reducción 
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 
 - [x] **Actualizar firmas y reglas**: Mantener el IPS actualizado con la última base de conocimientos de amenazas.
 - [x] **Segmentación de red**: Ubicar el IPS en puntos críticos para controlar tráfico entre zonas internas, DMZ y accesos externos.
@@ -88,7 +88,7 @@ Este tipo de respuesta es típica en entornos empresariales donde la reducción 
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 
 - [NIST SP 800-94: Guide to Intrusion Detection and Prevention Systems](https://csrc.nist.gov/publications/detail/sp/800-94/final)
 - [CIS Controls v8](https://www.cisecurity.org/controls)

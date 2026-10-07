@@ -1,5 +1,5 @@
 ---
-title: "Hardening (Bastionado)"
+title: "Hardening (bastionado de sistemas)"
 category: "Seguridad de sistemas"
 author: "@cromsal"
 tags:
@@ -11,7 +11,7 @@ tags:
 summary: "Práctica de seguridad que reduce la superficie de ataque de sistemas mediante la eliminación de componentes innecesarios y la aplicación y verificación de configuraciones seguras."
 ---
 
-# Hardening (Bastionado de sistemas)
+# Hardening (bastionado de sistemas)
 
 <div class="term-meta-box">
   <div class="term-meta-item">
@@ -39,7 +39,7 @@ El bastionado no consiste en aplicar una configuración universal: las medidas d
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 
 1. **Inventariar y definir el propósito**: identificar los activos, sus responsables, los servicios necesarios y el nivel de riesgo aceptable.
 2. **Reducir la superficie de ataque**: desinstalar o deshabilitar componentes no requeridos, cerrar puertos innecesarios y retirar cuentas o permisos que no se utilicen.
@@ -48,18 +48,18 @@ El bastionado no consiste en aplicar una configuración universal: las medidas d
 
 ---
 
-## 🎯 Ejemplo Práctico o Escenario de Demostración
+## 🎯 Ejemplo práctico o escenario de demostración
 
 Un servidor Linux administrado por SSH no debería permitir el acceso remoto directo como `root` ni depender de contraseñas débiles. El siguiente ejemplo muestra una configuración mínima orientativa para `/etc/ssh/sshd_config`; debe adaptarse a las políticas y a la versión de OpenSSH del sistema.
 
-=== "Escenario Vulnerable / Incorrecto"
+=== "Escenario vulnerable / incorrecto"
 
     ```text
     PermitRootLogin yes
     PasswordAuthentication yes
     ```
 
-=== "Escenario Seguro / Remediado"
+=== "Escenario seguro / remediado"
 
     ```text
     PermitRootLogin no
@@ -73,7 +73,7 @@ Antes de recargar SSH, valida la sintaxis con `sshd -t` y confirma la configurac
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 
 - [x] **Usar líneas base reconocidas**: seleccionar las recomendaciones CIS u otra guía aplicable al sistema y documentar las excepciones justificadas.
 - [x] **Deshabilitar lo innecesario**: retirar servicios, paquetes, puertos, cuentas y permisos que no sean necesarios para la función del activo.
@@ -83,7 +83,7 @@ Antes de recargar SSH, valida la sintaxis con `sshd -t` y confirma la configurac
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 
 - [CIS Benchmarks: guías de configuración segura](https://www.cisecurity.org/cis-benchmarks)
 - [NIST SP 800-70 Rev. 4: Security Configuration Checklists Program](https://csrc.nist.gov/pubs/sp/800/70/r4/final)

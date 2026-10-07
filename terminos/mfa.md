@@ -1,5 +1,5 @@
 ---
-title: "Autenticación Multifactor (MFA)"
+title: "Autenticación multifactor (MFA)"
 category: "Identidad y Gestión de Accesos"
 author: "@mariocq-ciber"
 tags:
@@ -11,7 +11,7 @@ tags:
 summary: "Método de autenticación que exige dos o más factores independientes para verificar la identidad y reducir el riesgo de accesos no autorizados."
 ---
 
-# Autenticación Multifactor (MFA)
+# Autenticación multifactor (MFA)
 
 <div class="term-meta-box">
   <div class="term-meta-item">
@@ -45,7 +45,7 @@ Las categorías clásicas de factores son:
 
 ---
 
-## ⚙️ ¿Cómo funciona? / Principios Fundamentales
+## ⚙️ ¿Cómo funciona? / Principios fundamentales
 
 1. **Inicio de sesión**: el usuario identifica la cuenta y presenta el primer factor, habitualmente una contraseña o una llave de acceso (*passkey*).
 2. **Verificación adicional**: el servicio solicita una prueba de otra categoría, como la aprobación criptográfica en una llave de seguridad o un código temporal generado por una aplicación.
@@ -65,7 +65,7 @@ Una passkey o llave FIDO2/WebAuthn puede realizar la autenticación con verifica
 
 ---
 
-## 🎯 Ejemplo Práctico o Escenario de Demostración
+## 🎯 Ejemplo práctico o escenario de demostración
 
 Una persona introduce su contraseña en el portal de correo desde un equipo nuevo. La contraseña por sí sola no basta: el portal exige una segunda prueba antes de crear la sesión.
 
@@ -93,7 +93,7 @@ sequenceDiagram
 
 ---
 
-## 🛡️ Medidas de Mitigación y Buenas Prácticas
+## 🛡️ Medidas de mitigación y buenas prácticas
 
 - [x] **Priorizar factores resistentes al phishing**: ofrecer passkeys o llaves FIDO2/WebAuthn, especialmente para cuentas privilegiadas, administración y acceso remoto.
 - [x] **Elegir alternativas con conocimiento de sus límites**: cuando no se disponga de FIDO2, preferir una aplicación TOTP frente a SMS siempre que sea viable; no presentar TOTP ni las notificaciones push convencionales como resistentes al phishing.
@@ -105,7 +105,7 @@ sequenceDiagram
 
 ---
 
-## 🔗 Referencias y Enlaces de Interés
+## 🔗 Referencias y enlaces de interés
 
 - [NIST SP 800-63B-4: Authentication and Authenticator Management](https://pages.nist.gov/800-63-4/sp800-63b.html)
 - [OWASP Multifactor Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Multifactor_Authentication_Cheat_Sheet.html)
