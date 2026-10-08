@@ -1,7 +1,7 @@
 ---
 title: "Sandboxing"
 category: "Contención y Aislamiento de Ejecución"
-author: "@cibercelia"
+author: "@viviana-lab"
 tags:
   - sandboxing
   - contencion
